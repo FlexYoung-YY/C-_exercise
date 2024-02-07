@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
 /* 
@@ -59,7 +60,7 @@ int quickSelect(vector<int> nums, int k, int low, int high){
             ++i;
             }
         }
-        cout << lt << gt << endl;
+        // cout << lt << gt << endl;
         if (gt+1==k){
             return nums[gt+1];
         }
@@ -78,10 +79,23 @@ int quickSelect(vector<int> nums, int k, int low, int high){
     }
 }
 
+priority_queue<int> KthLargest_heap(vector<int>& nums, int k){
+    priority_queue<int> heap;
+    for (int num : nums){
+        heap.push(-num); // priority_queue is a max-heap by default
+        if (heap.size() > k){
+            heap.pop();
+        }
+    }
+    return heap;
+}
+
 int main(){
     vector<int> nums = {3,2,3,1,2,4,5,5,6};
     int k = 5;
     // quickSort(nums, 0, nums.size()-1);
     cout << quickSelect(nums, k-1, 0, nums.size()-1) << endl;
-    return 0;
+    // solution using heap(priority_queue)
+    priority_queue<int> heap = KthLargest_heap(nums, k);
+    cout << -heap.top() << endl;
 }
