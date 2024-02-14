@@ -11,5 +11,6 @@ struct ListNode {
  };
 
 ListNode* createLinkedList(const std::vector<int> &);
+ListNode* createCycledLinkedList(const std::vector<int>&, int);
 
 #endif
